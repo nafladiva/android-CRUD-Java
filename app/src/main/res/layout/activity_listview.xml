@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imageIV"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_launcher_background" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="start"
-        android:layout_gravity="start">
+        android:layout_gravity="center"
+        android:paddingStart="8dp">
 
         <TextView
             android:id="@+id/nama"
@@ -18,35 +27,46 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/nim"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/jurusan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/editButton"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:layout_gravity="end"
-        android:focusable="false"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="end">
 
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:layout_gravity="end"
-        android:focusable="false"/>
+        <ImageButton
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:layout_gravity="end"
+            android:focusable="false"/>
+
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:layout_gravity="end"
+            android:focusable="false"/>
+
+    </LinearLayout>
 </LinearLayout>

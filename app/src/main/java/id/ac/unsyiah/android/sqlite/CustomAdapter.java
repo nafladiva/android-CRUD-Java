@@ -3,33 +3,43 @@ package id.ac.unsyiah.android.sqlite;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import id.ac.unsyiah.android.sqlite.data.DataMahasiswa;
+import id.ac.unsyiah.android.sqlite.data.Mahasiswa;
 
 public class CustomAdapter extends BaseAdapter {
     Context context;
     ArrayList<String> nim;
     ArrayList<String> nama;
     ArrayList<String> jurusan;
+    ArrayList<byte[]> image;
     LayoutInflater inflter;
     private DataMahasiswa db;
 
-    Button editButton, deleteButton;
+    ImageButton editButton, deleteButton;
 
-    public CustomAdapter(Context applicationContext, ArrayList<String> nim, ArrayList<String> nama, ArrayList<String> jurusan) {
+    public CustomAdapter(Context applicationContext, ArrayList<String> nim, ArrayList<String> nama, ArrayList<String> jurusan, ArrayList<byte[]> image) {
         this.context = applicationContext;
         this.nim = nim;
         this.nama = nama;
         this.jurusan = jurusan;
+        this.image = image;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
@@ -53,6 +63,15 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = inflter.inflate(R.layout.activity_listview, parent, false);
 
+        byte[] imageByte = image.get(position);
+        ImageView imageIV = (ImageView) convertView.findViewById(R.id.imageIV);
+        if(imageByte != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+            imageIV.setImageBitmap(bitmap);
+        } else {
+            imageIV.setImageResource(R.drawable.ic_launcher_background);
+        }
+
         TextView nimTV = (TextView) convertView.findViewById(R.id.nim);
         nimTV.setText(nim.get(position));
 
@@ -62,7 +81,7 @@ public class CustomAdapter extends BaseAdapter {
         TextView jurusanTV = (TextView) convertView.findViewById(R.id.jurusan);
         jurusanTV.setText(jurusan.get(position));
 
-        editButton = (Button) convertView.findViewById(R.id.editButton);
+        editButton = (ImageButton) convertView.findViewById(R.id.editButton);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +96,7 @@ public class CustomAdapter extends BaseAdapter {
             }
         });
 
-        deleteButton = (Button) convertView.findViewById(R.id.deleteButton);
+        deleteButton = (ImageButton) convertView.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

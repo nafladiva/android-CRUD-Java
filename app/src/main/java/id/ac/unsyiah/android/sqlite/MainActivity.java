@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//        MainActivity.this.deleteDatabase("mahasiswa.db");
         db = new DataMahasiswa(this);
         db.open();
 
         listView = (ListView) findViewById(R.id.listview);
-        CustomAdapter customAdapter = new CustomAdapter(MainActivity.this, db.getAllNIM(), db.getAllNama(), db.getAllJurusan());
+        CustomAdapter customAdapter = new CustomAdapter(MainActivity.this, db.getAllNIM(), db.getAllNama(), db.getAllJurusan(), db.getAllImage());
         listView.setAdapter(customAdapter);
 
         db.close();

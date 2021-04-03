@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE_MAHASISWA = "CREATE TABLE " + TABLE_MAHASISWA + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NIM + " TEXT,"
-                + KEY_NAMA + " TEXT," + KEY_JURUSAN + " TEXT" + ")";
+                + KEY_NAMA + " TEXT," + KEY_JURUSAN + " TEXT," + KEY_IMG + " BLOB" + ")";
         db.execSQL(CREATE_TABLE_MAHASISWA);
     }
 

@@ -6,6 +6,7 @@ public class Mahasiswa {
     String _nim;
     String _nama;
     String _jurusan;
+    byte[] _image;
 
     //Empty constructor
     //Default constructor
@@ -14,10 +15,11 @@ public class Mahasiswa {
     }
 
     //Constructor
-    public Mahasiswa(String nim, String nama, String jurusan){
+    public Mahasiswa(String nim, String nama, String jurusan, byte[] image){
         this._nim = nim;
         this._nama = nama;
         this._jurusan = jurusan;
+        this._image = image;
     }
 
     public int getId() {
@@ -50,6 +52,14 @@ public class Mahasiswa {
 
     public void setJurusan(String jurusan) {
         this._jurusan = jurusan;
+    }
+
+    public byte[] getImage() {
+        return _image;
+    }
+
+    public void setImage(byte[] _image) {
+        this._image = _image;
     }
 }
 

@@ -1,5 +1,6 @@
 package id.ac.unsyiah.android.sqlite.data;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
+import android.widget.ImageView;
 
 public class DataMahasiswa {
 
@@ -31,6 +36,7 @@ public class DataMahasiswa {
         values.put(DatabaseHelper.KEY_NAMA, mahasiswa.getNama());
         values.put(DatabaseHelper.KEY_NIM, mahasiswa.getNim());
         values.put(DatabaseHelper.KEY_JURUSAN, mahasiswa.getJurusan());
+        values.put(DatabaseHelper.KEY_IMG, mahasiswa.getImage());
 
         //inserting row
         database.insert(DatabaseHelper.TABLE_MAHASISWA, null, values);
@@ -95,6 +101,22 @@ public class DataMahasiswa {
 
         cursor.close();
         return listJurusan;
+    }
+
+    public ArrayList<byte[]> getAllImage() {
+        ArrayList<byte[]> listImage = new ArrayList<byte[]>();
+
+        String allImage = "SELECT foto FROM " + DatabaseHelper.TABLE_MAHASISWA;
+        Cursor cursor = database.rawQuery(allImage, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                listImage.add(cursor.getBlob(0));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return listImage;
     }
 
     public List<Mahasiswa> getAllMahasiswa(){
