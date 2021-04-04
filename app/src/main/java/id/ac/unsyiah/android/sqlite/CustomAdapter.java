@@ -32,7 +32,7 @@ public class CustomAdapter extends BaseAdapter {
     LayoutInflater inflter;
     private DataMahasiswa db;
 
-    ImageButton editButton, deleteButton;
+    Button editButton, deleteButton;
 
     public CustomAdapter(Context applicationContext, ArrayList<String> nim, ArrayList<String> nama, ArrayList<String> jurusan, ArrayList<byte[]> image) {
         this.context = applicationContext;
@@ -63,6 +63,9 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = inflter.inflate(R.layout.activity_listview, parent, false);
 
+        TextView nomorTV = (TextView) convertView.findViewById(R.id.nomor);
+        nomorTV.setText(String.valueOf(position+1));
+
         byte[] imageByte = image.get(position);
         ImageView imageIV = (ImageView) convertView.findViewById(R.id.imageIV);
         if(imageByte != null) {
@@ -81,7 +84,7 @@ public class CustomAdapter extends BaseAdapter {
         TextView jurusanTV = (TextView) convertView.findViewById(R.id.jurusan);
         jurusanTV.setText(jurusan.get(position));
 
-        editButton = (ImageButton) convertView.findViewById(R.id.editButton);
+        editButton = (Button) convertView.findViewById(R.id.editButton);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,13 +93,14 @@ public class CustomAdapter extends BaseAdapter {
                 intent.putExtra("nim", getNIM(position));
                 intent.putExtra("nama", getNama(position));
                 intent.putExtra("jurusan", getJurusan(position));
+                intent.putExtra("foto", getImage(position));
 
-                Toast.makeText(context, "Nim: " + getNIM(position) + "\n Nama: " + getNama(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "Nim: " + getNIM(position) + "\n Nama: " + getNama(position), Toast.LENGTH_LONG).show();
                 context.startActivity(intent);
             }
         });
 
-        deleteButton = (ImageButton) convertView.findViewById(R.id.deleteButton);
+        deleteButton = (Button) convertView.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,5 +127,9 @@ public class CustomAdapter extends BaseAdapter {
 
     public String getJurusan(int position) {
         return jurusan.get(position);
+    }
+
+    public byte[] getImage(int position) {
+        return image.get(position);
     }
 }

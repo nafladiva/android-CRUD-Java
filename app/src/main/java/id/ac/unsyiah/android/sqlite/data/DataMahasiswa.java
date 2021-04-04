@@ -42,11 +42,12 @@ public class DataMahasiswa {
         database.insert(DatabaseHelper.TABLE_MAHASISWA, null, values);
     }
 
-    public void updateMahasiswa(String nim, String nama, String jurusan) {
+    public void updateMahasiswa(String nim, String nama, String jurusan, byte[] image) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.KEY_NIM, nim);
         values.put(DatabaseHelper.KEY_NAMA, nama);
         values.put(DatabaseHelper.KEY_JURUSAN, jurusan);
+        values.put(DatabaseHelper.KEY_IMG, image);
 
         database.update(DatabaseHelper.TABLE_MAHASISWA, values, "nim=?", new String[]{nim});
     }
